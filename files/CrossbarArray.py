@@ -13,29 +13,39 @@ class CbaDriver:
         self.bitline = bitline
         self.wordline = wordline
 
+        self._invalidate_simulation_cache()
+
     def _simulation_setup(self, exe, dir, netlist, sim_id=7):
         simulator.set_ltspice(exe=exe, dir=dir)
         self.simulator_netlist = netlist
         self.simulator_id = sim_id
 
     def _simulation_execute(self):
-        return simulator.simulate_netlist(
-            wordline=self.wordline,
-            bitline=self.bitline,
-            io=self.io,
-            netlist=self.simulator_netlist,
-            tmp_id=self.simulator_id)
+        if not self.cache_result:
+            self.cache_result = simulator.simulate_netlist(
+                wordline=self.wordline,
+                bitline=self.bitline,
+                io=self.io,
+                netlist=self.simulator_netlist,
+                tmp_id=self.simulator_id)
+        return self.cache_result
+
+    def _invalidate_simulation_cache(self):
+        self.cache_result = None
 
     def program_resistance_state(self, states):
+        self._invalidate_simulation_cache()
         assert self.wordline == len(states)
         assert self.bitline == len(states[0])
         self.io['G'] = np.array(states)
 
     def drive_bit_voltage(self, array):
+        self._invalidate_simulation_cache()
         assert self.bitline == len(array)
         self.io['BIT'] = np.array(array)
 
     def drive_word_voltage(self, array):
+        self._invalidate_simulation_cache()
         assert self.wordline == len(array)
         self.io['WORD'] = np.array(array)
 
