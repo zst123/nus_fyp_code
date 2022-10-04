@@ -25,12 +25,12 @@ def simulate_netlist(wordline, bitline, io, netlist="my_crossbar_wrapper", tmp_i
     # Sub in all the values
     for r in range(wordline):
         label = f"<WORD{r}>"
-        value = str(int(io['WORD'][r]))
+        value = str(io['WORD'][r])
         content = content.replace(label, value)
 
     for c in range(bitline):
         label = f"<BIT{c}>"
-        value = str(int(io['BIT'][c]))
+        value = str(io['BIT'][c])
         content = content.replace(label, value)
 
     cba_params = []
