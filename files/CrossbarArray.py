@@ -15,8 +15,11 @@ class CbaDriver:
 
         self._invalidate_simulation_cache()
 
-    def _simulation_setup(self, exe, dir, netlist, sim_id=7):
-        simulator.set_ltspice(exe=exe, dir=dir)
+    def _simulation_setup(self, exe, dir, netlist, spice='ltspice', sim_id=7):
+        if spice == 'ltspice':
+            simulator.set_ltspice(exe=exe, dir=dir)
+        elif spice == 'hspice':
+            simulator.set_hspice(exe=exe, dir=dir)
         self.simulator_netlist = netlist
         self.simulator_id = sim_id
 
@@ -71,6 +74,7 @@ class CbaRuntime:
                               bitline=CBA_PARAMETERS['bitline'])
         self.cba1._simulation_setup(exe=SIM_PARAMETERS['exe'],
                                     dir=SIM_PARAMETERS['dir'],
+                                    spice=SIM_PARAMETERS['spice'],
                                     netlist=CIRCUIT_PARAMETERS['wrapper'],
                                     sim_id=1)
 
@@ -79,6 +83,7 @@ class CbaRuntime:
                               bitline=CBA_PARAMETERS['bitline'])
         self.cba2._simulation_setup(exe=SIM_PARAMETERS['exe'],
                                     dir=SIM_PARAMETERS['dir'],
+                                    spice=SIM_PARAMETERS['spice'],
                                     netlist=CIRCUIT_PARAMETERS['wrapper'],
                                     sim_id=2)
         # Midpoint bias
