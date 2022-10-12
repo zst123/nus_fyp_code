@@ -1,0 +1,97 @@
+* test8x8.hspice.net
+XCBA1 BIT0 BIT1 BIT2 BIT3 BIT4 BIT5 BIT6 BIT7 WORD0 WORD1 WORD2 WORD3 WORD4 WORD5 WORD6 WORD7 crossbar_subcircuit G0.0=1 G1.0=1 G2.0=0 G3.0=0 G4.0=0 G5.0=0 G6.0=0 G7.0=0 G0.1=0 G1.1=0 G2.1=0 G3.1=0 G4.1=0 G5.1=0 G6.1=0 G7.1=0 G0.2=0 G1.2=0 G2.2=1 G3.2=0 G4.2=0 G5.2=1 G6.2=0 G7.2=0 G0.3=0 G1.3=0 G2.3=0 G3.3=1 G4.3=0 G5.3=0 G6.3=0 G7.3=0 G0.4=0 G1.4=0 G2.4=0 G3.4=0 G4.4=1 G5.4=0 G6.4=0 G7.4=0 G0.5=1 G1.5=0 G2.5=0 G3.5=0 G4.5=0 G5.5=1 G6.5=0 G7.5=0 G0.6=0 G1.6=0 G2.6=0 G3.6=0 G4.6=0 G5.6=0 G6.6=1 G7.6=0 G0.7=0 G1.7=0 G2.7=0 G3.7=0 G4.7=0 G5.7=0 G6.7=0 G7.7=1
+V.BIT0 BIT0 0 0.0
+V.BIT1 BIT1 0 0.0
+V.BIT2 BIT2 0 0.0
+V.BIT3 BIT3 0 1.0
+V.BIT4 BIT4 0 1.0
+V.BIT5 BIT5 0 0.0
+V.BIT6 BIT6 0 0.0
+V.BIT7 BIT7 0 0.0
+V.WORD0 WORD0 0 8.0
+V.WORD1 WORD1 0 8.1
+V.WORD2 WORD2 0 8.2
+V.WORD3 WORD3 0 8.3
+V.WORD4 WORD4 0 8.4
+V.WORD5 WORD5 0 8.5
+V.WORD6 WORD6 0 8.6
+V.WORD7 WORD7 0 8.7
+
+* block symbol definitions
+.subckt crossbar_subcircuit BIT0 BIT1 BIT2 BIT3 BIT4 BIT5 BIT6 BIT7 WORD0 WORD1 WORD2 WORD3 WORD4 WORD5 WORD6 WORD7
+XG0.0 WORD0 BIT0 cell_subcircuit state='G0.0'
+XG1.0 WORD1 BIT0 cell_subcircuit state='G1.0'
+XG2.0 WORD2 BIT0 cell_subcircuit state='G2.0'
+XG3.0 WORD3 BIT0 cell_subcircuit state='G3.0'
+XG4.0 WORD4 BIT0 cell_subcircuit state='G4.0'
+XG5.0 WORD5 BIT0 cell_subcircuit state='G5.0'
+XG6.0 WORD6 BIT0 cell_subcircuit state='G6.0'
+XG7.0 WORD7 BIT0 cell_subcircuit state='G7.0'
+XG0.1 WORD0 BIT1 cell_subcircuit state='G0.1'
+XG1.1 WORD1 BIT1 cell_subcircuit state='G1.1'
+XG2.1 WORD2 BIT1 cell_subcircuit state='G2.1'
+XG3.1 WORD3 BIT1 cell_subcircuit state='G3.1'
+XG4.1 WORD4 BIT1 cell_subcircuit state='G4.1'
+XG5.1 WORD5 BIT1 cell_subcircuit state='G5.1'
+XG6.1 WORD6 BIT1 cell_subcircuit state='G6.1'
+XG7.1 WORD7 BIT1 cell_subcircuit state='G7.1'
+XG0.2 WORD0 BIT2 cell_subcircuit state='G0.2'
+XG1.2 WORD1 BIT2 cell_subcircuit state='G1.2'
+XG2.2 WORD2 BIT2 cell_subcircuit state='G2.2'
+XG3.2 WORD3 BIT2 cell_subcircuit state='G3.2'
+XG4.2 WORD4 BIT2 cell_subcircuit state='G4.2'
+XG5.2 WORD5 BIT2 cell_subcircuit state='G5.2'
+XG6.2 WORD6 BIT2 cell_subcircuit state='G6.2'
+XG7.2 WORD7 BIT2 cell_subcircuit state='G7.2'
+XG0.3 WORD0 BIT3 cell_subcircuit state='G0.3'
+XG1.3 WORD1 BIT3 cell_subcircuit state='G1.3'
+XG2.3 WORD2 BIT3 cell_subcircuit state='G2.3'
+XG3.3 WORD3 BIT3 cell_subcircuit state='G3.3'
+XG4.3 WORD4 BIT3 cell_subcircuit state='G4.3'
+XG5.3 WORD5 BIT3 cell_subcircuit state='G5.3'
+XG6.3 WORD6 BIT3 cell_subcircuit state='G6.3'
+XG7.3 WORD7 BIT3 cell_subcircuit state='G7.3'
+XG0.4 WORD0 BIT4 cell_subcircuit state='G0.4'
+XG1.4 WORD1 BIT4 cell_subcircuit state='G1.4'
+XG2.4 WORD2 BIT4 cell_subcircuit state='G2.4'
+XG3.4 WORD3 BIT4 cell_subcircuit state='G3.4'
+XG4.4 WORD4 BIT4 cell_subcircuit state='G4.4'
+XG5.4 WORD5 BIT4 cell_subcircuit state='G5.4'
+XG6.4 WORD6 BIT4 cell_subcircuit state='G6.4'
+XG7.4 WORD7 BIT4 cell_subcircuit state='G7.4'
+XG0.5 WORD0 BIT5 cell_subcircuit state='G0.5'
+XG1.5 WORD1 BIT5 cell_subcircuit state='G1.5'
+XG2.5 WORD2 BIT5 cell_subcircuit state='G2.5'
+XG3.5 WORD3 BIT5 cell_subcircuit state='G3.5'
+XG4.5 WORD4 BIT5 cell_subcircuit state='G4.5'
+XG5.5 WORD5 BIT5 cell_subcircuit state='G5.5'
+XG6.5 WORD6 BIT5 cell_subcircuit state='G6.5'
+XG7.5 WORD7 BIT5 cell_subcircuit state='G7.5'
+XG0.6 WORD0 BIT6 cell_subcircuit state='G0.6'
+XG1.6 WORD1 BIT6 cell_subcircuit state='G1.6'
+XG2.6 WORD2 BIT6 cell_subcircuit state='G2.6'
+XG3.6 WORD3 BIT6 cell_subcircuit state='G3.6'
+XG4.6 WORD4 BIT6 cell_subcircuit state='G4.6'
+XG5.6 WORD5 BIT6 cell_subcircuit state='G5.6'
+XG6.6 WORD6 BIT6 cell_subcircuit state='G6.6'
+XG7.6 WORD7 BIT6 cell_subcircuit state='G7.6'
+XG0.7 WORD0 BIT7 cell_subcircuit state='G0.7'
+XG1.7 WORD1 BIT7 cell_subcircuit state='G1.7'
+XG2.7 WORD2 BIT7 cell_subcircuit state='G2.7'
+XG3.7 WORD3 BIT7 cell_subcircuit state='G3.7'
+XG4.7 WORD4 BIT7 cell_subcircuit state='G4.7'
+XG5.7 WORD5 BIT7 cell_subcircuit state='G5.7'
+XG6.7 WORD6 BIT7 cell_subcircuit state='G6.7'
+XG7.7 WORD7 BIT7 cell_subcircuit state='G7.7'
+.ends crossbar_subcircuit
+
+.subckt cell_subcircuit a b
+.param resistance=table(state,0,1000,1,100)
+R1 a b 'resistance'
+.ends cell_subcircuit
+
+.tran 0m 1m 0m
+*.backanno
+.OPTIONS POST=2 nomod
+.end
+
