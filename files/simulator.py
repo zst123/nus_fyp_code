@@ -89,7 +89,7 @@ def simulate_netlist(wordline, bitline, io, netlist="my_crossbar_wrapper", tmp_i
 
     # Read simulation
     if use_spice == 'ltspice':
-        l = ltspice.Ltspice(filename_tmp_netlist)
+        l = ltspice.Ltspice(tmp_filename + '.raw')
         l.parse()
         def _get_data(label):
             return l.get_data(label)
