@@ -52,23 +52,7 @@ def simulate_netlist(wordline, bitline, io, netlist="my_crossbar_wrapper", tmp_i
         content = f.read()
 
     # Sub in all the values
-    for r in range(wordline):
-        label = f"<WORD{r}>"
-        value = str(io['WORD'][r])
-        content = content.replace(label, value)
-
-    for c in range(bitline):
-        label = f"<BIT{c}>"
-        value = str(io['BIT'][c])
-        content = content.replace(label, value)
-
-    cba_params = []
-    for c in range(bitline):
-        for r in range(wordline):
-            label = f"G{r}.{c}"
-            value = str(int(io['G'][r][c]))
-            cba_params.append(f"{label}={value}")
-    content = content.replace("<CBA1_PARAMS>", " ".join(cba_params))
+    content = handle_param_sub(content, wordline, bitline, io)
 
     # Write to file
     tmp_filename = f"{netlist}_tmp{tmp_id}"
@@ -105,22 +89,45 @@ def simulate_netlist(wordline, bitline, io, netlist="my_crossbar_wrapper", tmp_i
     # plt.plot(time, V_cap)
     # plt.show()
 
+    return handle_result_sub(wordline, bitline, _get_data)
+
+def handle_result_sub(wordline, bitline, get_data):
     word_current = []
-    for r in range(row):
+    for r in range(wordline):
         label = f"I(V.WORD{r})"
-        data = _get_data(label)[-1] # flowing into source
+        data = get_data(label)[-1] # flowing into source
         word_current.append(data)
 
     bit_current = []
-    for c in range(col):
+    for c in range(bitline):
         label = f"I(V.BIT{c})"
-        data = _get_data(label)[-1] # flowing into source
+        data = get_data(label)[-1] # flowing into source
         bit_current.append(data)
 
     return {
         'word_current': word_current,
         'bit_current': bit_current
     }
+
+def handle_param_sub(content, wordline, bitline, io):
+    for r in range(wordline):
+        label = f"<WORD{r}>"
+        value = str(io['WORD'][r])
+        content = content.replace(label, value)
+
+    for c in range(bitline):
+        label = f"<BIT{c}>"
+        value = str(io['BIT'][c])
+        content = content.replace(label, value)
+
+    cba_params = []
+    for c in range(bitline):
+        for r in range(wordline):
+            label = f"G{r}.{c}"
+            value = str(int(io['G'][r][c]))
+            cba_params.append(f"{label}={value}")
+    content = content.replace("<CBA1_PARAMS>", " ".join(cba_params))
+    return content
 
 if __name__ == "__main__":
     import code
